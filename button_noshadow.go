@@ -90,7 +90,7 @@ func (b *ButtonNoShadow) Draw() {
 	shift, text := AlignColorizedText(b.title, w-1, b.align)
 	if b.isPressed() == 0 {
 		SetBackColor(bg)
-		FillRect(x, y, w, h, ' ')
+		FillRect(x, y, w-1, h-1, ' ')
 		DrawText(x+shift, y+dy, text)
 	} else {
 		SetBackColor(bg)
