@@ -40,14 +40,14 @@ func CreateButton_NoShadow(parent Control, width, height int, title string, scal
 		height = 3
 	}
 	if width == AutoSize {
-		width = xs.Len(title) + 2 + 1
+		width = xs.Len(title) + 2
 	}
 
 	if height < 3 {
 		height = 3
 	}
-	if width < 6 {
-		width = 6
+	if width < 5 {
+		width = 5
 	}
 
 	b.SetTitle(title)
@@ -90,7 +90,7 @@ func (b *ButtonNoShadow) Draw() {
 	shift, text := AlignColorizedText(b.title, w-1, b.align)
 	if b.isPressed() == 0 {
 		SetBackColor(bg)
-		FillRect(x, y, w-1, h-1, ' ')
+		FillRect(x, y, w, h, ' ')
 		DrawText(x+shift, y+dy, text)
 	} else {
 		SetBackColor(bg)
