@@ -8,11 +8,11 @@ import (
 )
 
 /*
-Button_noshadow is a simpe push button control. Every time a user clicks a Button_noshadow, it
+Button_NoShadow is a simple push button control. Every time a user clicks a Button_NoShadow, it
 emits OnClick event. Event has only one valid field Sender.
-Button_noshadow can be clicked with mouse or using space on keyboard while the Button_noshadow is active.
+Button_NoShadow can be clicked with mouse or using space on keyboard while the Button_NoShadow is active.
 */
-type Button_noshadow struct {
+type ButtonNoShadow struct {
 	BaseControl
 	shadowColor term.Attribute
 	bgActive    term.Attribute
@@ -21,7 +21,7 @@ type Button_noshadow struct {
 }
 
 /*
-NewButton creates a new Button_noshadow.
+NewButton creates a new Button_NoShadow.
 view - is a View that manages the control
 parent - is container that keeps the control. The same View can be a view and a parent at the same time.
 width and heigth - are minimal size of the control.
@@ -29,8 +29,8 @@ title - button title.
 scale - the way of scaling the control when the parent is resized. Use DoNotScale constant if the
 control should keep its original size.
 */
-func CreateButton_noshadow(parent Control, width, height int, title string, scale int) *Button_noshadow {
-	b := new(Button_noshadow)
+func CreateButton_NoShadow(parent Control, width, height int, title string, scale int) *ButtonNoShadow {
+	b := new(ButtonNoShadow)
 	b.BaseControl = NewBaseControl()
 
 	b.parent = parent
@@ -63,7 +63,7 @@ func CreateButton_noshadow(parent Control, width, height int, title string, scal
 }
 
 // Repaint draws the control on its View surface
-func (b *Button_noshadow) Draw() {
+func (b *ButtonNoShadow) Draw() {
 	if b.hidden {
 		return
 	}
@@ -99,11 +99,11 @@ func (b *Button_noshadow) Draw() {
 	}
 }
 
-func (b *Button_noshadow) isPressed() int32 {
+func (b *ButtonNoShadow) isPressed() int32 {
 	return atomic.LoadInt32(&b.pressed)
 }
 
-func (b *Button_noshadow) setPressed(pressed int32) {
+func (b *ButtonNoShadow) setPressed(pressed int32) {
 	atomic.StoreInt32(&b.pressed, pressed)
 }
 
@@ -113,7 +113,7 @@ processes an event it should return true. If the method returns false it means
 that the control do not want or cannot process the event and the caller sends
 the event to the control parent
 */
-func (b *Button_noshadow) ProcessEvent(event Event) bool {
+func (b *ButtonNoShadow) ProcessEvent(event Event) bool {
 	if !b.Enabled() {
 		return false
 	}
@@ -161,6 +161,6 @@ func (b *Button_noshadow) ProcessEvent(event Event) bool {
 
 // OnClick sets the callback that is called when one clicks button
 // with mouse or pressing space on keyboard while the button is active
-func (b *Button_noshadow) OnClick(fn func(Event)) {
+func (b *ButtonNoShadow) OnClick(fn func(Event)) {
 	b.onClick = fn
 }

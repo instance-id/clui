@@ -12,7 +12,7 @@ application with mouse support easily. Available at this moment controls:
     - CheckBox is a control to allow to choose between 2 or 3 choices
     - RadioGroup is a control to select one item of the available
     - ProgressBar is a control to show some task progress
-    - Button_noshadow is push button control
+    - Button_NoShadow is push button control
     - Dialogs for a user to confirm something or to choose an item
     - more controls to come later
 * Drag-n-drop with mouse is not supported due to limitations of some terminals.
@@ -26,7 +26,7 @@ One touch combinations:
     - Alt+PgDn, Alt+PgUp to select next or previous control in the current View,
         respectively. Hotkeys added because it is not possible to catch
         TAB contol with Shift or Ctrl modifier
-    - Space to click a Button_noshadow, CheckBox or RadioGroup if the control is active
+    - Space to click a Button_NoShadow, CheckBox or RadioGroup if the control is active
     - Ctrl+R to clear the EditField
     - Arrows, Home, and End to move cursor inside EditField and ListBox
 Sequences:

@@ -14,9 +14,9 @@ func main() {
 	frmResize := ui.CreateFrame(view, 8, 6, ui.BorderNone, ui.Fixed)
 	frmResize.SetTitle("FrameTop")
 	frmResize.SetPack(ui.Horizontal)
-	btn1 := ui.CreateButton(frmResize, 8, 5, "Button_noshadow 1", 1)
-	btn2 := ui.CreateButton(frmResize, 8, 5, "Button_noshadow 2", 1)
-	btn3 := ui.CreateButton(frmResize, 8, 5, "Button_noshadow 3", 1)
+	btn1 := ui.CreateButton(frmResize, 8, 5, "Button_NoShadow 1", 1)
+	btn2 := ui.CreateButton(frmResize, 8, 5, "Button_NoShadow 2", 1)
+	btn3 := ui.CreateButton(frmResize, 8, 5, "Button_NoShadow 3", 1)
 
 	frmBtns := ui.CreateFrame(view, 8, 5, ui.BorderNone, ui.Fixed)
 	frmBtns.SetPack(ui.Horizontal)

@@ -2,7 +2,7 @@
 Demo includes:
     - How to intialize and run the application
     - How to stop the application
-    - How to use Control's events (Button_noshadow ones)
+    - How to use Control's events (Button_NoShadow ones)
     - How to change theme on the fly
     - How to use dialogs
     - How to make composer refresh the screen

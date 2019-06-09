@@ -8,9 +8,9 @@ import (
 )
 
 /*
-Button_noshadow is a simpe push button control. Every time a user clicks a Button_noshadow, it
+Button_NoShadow is a simpe push button control. Every time a user clicks a Button_NoShadow, it
 emits OnClick event. Event has only one valid field Sender.
-Button_noshadow can be clicked with mouse or using space on keyboard while the Button_noshadow is active.
+Button_NoShadow can be clicked with mouse or using space on keyboard while the Button_NoShadow is active.
 */
 type Button struct {
 	BaseControl
@@ -21,7 +21,7 @@ type Button struct {
 }
 
 /*
-NewButton creates a new Button_noshadow.
+NewButton creates a new Button_NoShadow.
 view - is a View that manages the control
 parent - is container that keeps the control. The same View can be a view and a parent at the same time.
 width and heigth - are minimal size of the control.
