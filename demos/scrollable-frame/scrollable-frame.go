@@ -17,7 +17,7 @@ func main() {
 	frm.SetScrollable(true)
 
 	for i := 0; i < 10; i++ {
-		label := fmt.Sprintf("Button %d - press to quit", i)
+		label := fmt.Sprintf("Button_noshadow %d - press to quit", i)
 		btn := ui.CreateButton(frm, 40, ui.AutoSize, label, 1)
 
 		btn.OnClick(func(ev ui.Event) {

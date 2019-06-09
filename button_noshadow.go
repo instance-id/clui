@@ -12,7 +12,7 @@ Button_noshadow is a simpe push button control. Every time a user clicks a Butto
 emits OnClick event. Event has only one valid field Sender.
 Button_noshadow can be clicked with mouse or using space on keyboard while the Button_noshadow is active.
 */
-type Button struct {
+type Button_noshadow struct {
 	BaseControl
 	shadowColor term.Attribute
 	bgActive    term.Attribute
@@ -29,22 +29,22 @@ title - button title.
 scale - the way of scaling the control when the parent is resized. Use DoNotScale constant if the
 control should keep its original size.
 */
-func CreateButton(parent Control, width, height int, title string, scale int) *Button {
-	b := new(Button)
+func CreateButton_noshadow(parent Control, width, height int, title string, scale int) *Button_noshadow {
+	b := new(Button_noshadow)
 	b.BaseControl = NewBaseControl()
 
 	b.parent = parent
 	b.align = AlignCenter
 
 	if height == AutoSize {
-		height = 4
+		height = 3
 	}
 	if width == AutoSize {
 		width = xs.Len(title) + 2 + 1
 	}
 
-	if height < 4 {
-		height = 4
+	if height < 3 {
+		height = 3
 	}
 	if width < 6 {
 		width = 6
@@ -63,7 +63,7 @@ func CreateButton(parent Control, width, height int, title string, scale int) *B
 }
 
 // Repaint draws the control on its View surface
-func (b *Button) Draw() {
+func (b *Button_noshadow) Draw() {
 	if b.hidden {
 		return
 	}
@@ -77,7 +77,6 @@ func (b *Button) Draw() {
 	w, h := b.Size()
 
 	fg, bg := b.fg, b.bg
-	shadow := RealColor(b.shadowColor, b.Style(), ColorButtonShadow)
 	if b.disabled {
 		fg, bg = RealColor(fg, b.Style(), ColorButtonDisabledText), RealColor(bg, b.Style(), ColorButtonDisabledBack)
 	} else if b.Active() {
@@ -90,23 +89,21 @@ func (b *Button) Draw() {
 	SetTextColor(fg)
 	shift, text := AlignColorizedText(b.title, w-1, b.align)
 	if b.isPressed() == 0 {
-		SetBackColor(shadow)
-		FillRect(x+1, y+1, w-1, h-1, ' ')
 		SetBackColor(bg)
-		FillRect(x, y, w-1, h-1, ' ')
+		FillRect(x, y, w, h, ' ')
 		DrawText(x+shift, y+dy, text)
 	} else {
 		SetBackColor(bg)
-		FillRect(x+1, y+1, w-1, h-1, ' ')
+		FillRect(x, y, w, h, ' ')
 		DrawText(x+1+shift, y+1+dy, b.title)
 	}
 }
 
-func (b *Button) isPressed() int32 {
+func (b *Button_noshadow) isPressed() int32 {
 	return atomic.LoadInt32(&b.pressed)
 }
 
-func (b *Button) setPressed(pressed int32) {
+func (b *Button_noshadow) setPressed(pressed int32) {
 	atomic.StoreInt32(&b.pressed, pressed)
 }
 
@@ -116,7 +113,7 @@ processes an event it should return true. If the method returns false it means
 that the control do not want or cannot process the event and the caller sends
 the event to the control parent
 */
-func (b *Button) ProcessEvent(event Event) bool {
+func (b *Button_noshadow) ProcessEvent(event Event) bool {
 	if !b.Enabled() {
 		return false
 	}
@@ -164,6 +161,6 @@ func (b *Button) ProcessEvent(event Event) bool {
 
 // OnClick sets the callback that is called when one clicks button
 // with mouse or pressing space on keyboard while the button is active
-func (b *Button) OnClick(fn func(Event)) {
+func (b *Button_noshadow) OnClick(fn func(Event)) {
 	b.onClick = fn
 }

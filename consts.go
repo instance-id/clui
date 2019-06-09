@@ -282,7 +282,7 @@ const (
 	// Content of a control changed. E.g, EditField text changed, selected item of ListBox changed etc
 	// X defines how the content was changed: 0 - by pressing any key, 1 - by clicking mouse. This is used by compound controls, e.g, child ListBox of ComboBox should change its parent EditField text when a user selects a new item an ListBox with arrow keys and the ListBox should be closed if a user clicks on ListBox item
 	EventChanged
-	// Button event - button was clicked
+	// Button_noshadow event - button was clicked
 	EventClick
 	// dialog closed
 	EventDialogClose
