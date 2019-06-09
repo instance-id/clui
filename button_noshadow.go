@@ -94,7 +94,7 @@ func (b *ButtonNoShadow) Draw() {
 		DrawText(x+shift, y+dy, text)
 	} else {
 		SetBackColor(bg)
-		FillRect(x, y, w, h, ' ')
+		FillRect(x+1, y+1, w-1, h-1, ' ')
 		DrawText(x+1+shift, y+1+dy, b.title)
 	}
 }
