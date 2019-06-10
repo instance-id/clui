@@ -1,9 +1,11 @@
 package clui
 
 import (
+	"fmt"
 	xs "github.com/huandu/xstrings"
 	term "github.com/nsf/termbox-go"
 	"regexp"
+	"strconv"
 	"strings"
 )
 
@@ -229,6 +231,15 @@ func StringToColor(str string) term.Attribute {
 	for _, item := range parts {
 		item = strings.Trim(item, " ")
 		item = strings.ToLower(item)
+
+		if c, err := strconv.Atoi(item); err == nil {
+			if (c >= 0) && (c <= 255) {
+				clr = term.Attribute(c)
+				return clr
+			} else {
+				panic(fmt.Sprintf("Color integer must be between 0-255. Current value: %v", c))
+			}
+		}
 
 		c, ok := colorMap[item]
 		if ok {
