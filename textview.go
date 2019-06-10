@@ -490,6 +490,33 @@ func (l *TextView) LoadFile(filename string) bool {
 	return true
 }
 
+func (l *TextView) LoadFileMD(filename string) bool {
+	l.lines = make([]string, 0)
+
+	file, err := os.Open(filename)
+	if err != nil {
+		return false
+	}
+
+	defer file.Close()
+
+	scanner := bufio.NewScanner(file)
+	for scanner.Scan() {
+		line := scanner.Text()
+		//line = strings.TrimSpace(line)
+		l.lines = append(l.lines, line)
+	}
+
+	l.applyLimit()
+	l.calculateVirtualSize()
+
+	if l.autoscroll {
+		l.end()
+	}
+
+	return true
+}
+
 // AutoScroll returns if autoscroll mode is enabled.
 // If the autoscroll mode is enabled then the content always
 // scrolled to the end after adding a text
