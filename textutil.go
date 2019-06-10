@@ -238,7 +238,6 @@ func StringToColor(str string) term.Attribute {
 					clr = term.Attribute(c)
 					return clr
 				} else {
-					panic(fmt.Sprintf("Color integer must be between 0-255. Current value: %v", c))
 				}
 			}
 		}
