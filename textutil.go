@@ -232,19 +232,29 @@ func StringToColor(str string) term.Attribute {
 		item = strings.Trim(item, " ")
 		item = strings.ToLower(item)
 
-		if c, err := strconv.Atoi(item); err == nil {
-			if (c >= 0) && (c <= 255) {
-				clr = term.Attribute(c)
-				return clr
-			} else {
-				panic(fmt.Sprintf("Color integer must be between 0-255. Current value: %v", c))
+		if term.SetOutputMode(term.OutputCurrent) == term.Output256 {
+			if c, err := strconv.Atoi(item); err == nil {
+				if (c >= 0) && (c <= 255) {
+					clr = term.Attribute(c)
+					return clr
+				} else {
+					panic(fmt.Sprintf("Color integer must be between 0-255. Current value: %v", c))
+				}
 			}
 		}
 
-		c, ok := colorMap[item]
-		if ok {
-			clr |= c
+		if _, err := strconv.Atoi(item); err == nil {
+			{
+				panic(fmt.Sprintf("To use 0-255 integer color you must set terminal output mode: 'term.SetOutputMode(term.Output256)'"))
+			}
+		} else {
+			c, ok := colorMap[item]
+			if ok {
+				clr |= c
+				return clr
+			}
 		}
+
 	}
 
 	return clr
