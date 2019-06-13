@@ -232,9 +232,6 @@ func StringToColor(str string) term.Attribute {
 		item = strings.Trim(item, " ")
 		item = strings.ToLower(item)
 
-		if term.OutputMode(2) == term.Output256 {
-
-		}
 		if c, err := strconv.Atoi(item); err == nil {
 			if (c >= 0) && (c <= 255) {
 				clr = term.Attribute(c)
