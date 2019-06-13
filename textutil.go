@@ -254,7 +254,6 @@ func StringToColor(str string) term.Attribute {
 				return clr
 			}
 		}
-
 	}
 
 	return clr

@@ -8,20 +8,21 @@ import (
 )
 
 /*
-Button_NoShadow is a simpe push button control. Every time a user clicks a Button_NoShadow, it
+Button is a simpe push button control. Every time a user clicks a Button, it
 emits OnClick event. Event has only one valid field Sender.
-Button_NoShadow can be clicked with mouse or using space on keyboard while the Button_NoShadow is active.
+Button can be clicked with mouse or using space on keyboard while the Button is active.
 */
 type Button struct {
 	BaseControl
 	shadowColor term.Attribute
 	bgActive    term.Attribute
 	pressed     int32
+	shadowType  ButtonShadow
 	onClick     func(Event)
 }
 
 /*
-NewButton creates a new Button_NoShadow.
+NewButton creates a new Button.
 view - is a View that manages the control
 parent - is container that keeps the control. The same View can be a view and a parent at the same time.
 width and heigth - are minimal size of the control.
@@ -90,8 +91,24 @@ func (b *Button) Draw() {
 	SetTextColor(fg)
 	shift, text := AlignColorizedText(b.title, w-1, b.align)
 	if b.isPressed() == 0 {
-		SetBackColor(shadow)
-		FillRect(x+1, y+1, w-1, h-1, ' ')
+		switch b.shadowType {
+		case ShadowFull:
+			SetBackColor(shadow)
+			FillRect(x+1, y+h-1, w-1, 1, ' ')
+			FillRect(x+w-1, y+1, 1, h-1, ' ')
+		case ShadowHalf:
+			parts := []rune(SysObject(ObjButton))
+			var bottomCh, rightCh rune
+			if len(parts) < 3 {
+				bottomCh, rightCh = '▀', '█'
+			} else {
+				bottomCh, rightCh = parts[0], parts[1]
+			}
+			SetTextColor(shadow)
+			FillRect(x+1, y+h-1, w-1, 1, bottomCh)
+			FillRect(x+w-1, y+1, 1, h-2, rightCh)
+		}
+		SetTextColor(fg)
 		SetBackColor(bg)
 		FillRect(x, y, w-1, h-1, ' ')
 		DrawText(x+shift, y+dy, text)
@@ -166,4 +183,16 @@ func (b *Button) ProcessEvent(event Event) bool {
 // with mouse or pressing space on keyboard while the button is active
 func (b *Button) OnClick(fn func(Event)) {
 	b.onClick = fn
+}
+
+// ShadowType returns type of a show the button drops
+func (b *Button) ShadowType() ButtonShadow {
+	return b.shadowType
+}
+
+// SetShadowType changes the shadow the button drops
+func (b *Button) SetShadowType(sh ButtonShadow) {
+	b.mtx.Lock()
+	b.shadowType = sh
+	b.mtx.Unlock()
 }
